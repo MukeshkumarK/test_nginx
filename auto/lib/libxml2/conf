@@ -1,0 +1,28 @@
+
+# author : Ramalingam K
+# created : 2-1-2024
+
+
+
+ngx_feature="dash_parser"
+ngx_feature_name="NGX_HAVE_DASH_PARSER"
+ngx_feature_run=yes
+ngx_feature_incs="#include <libgen.h>
+		  		  #include <dirent.h>
+                  #include <libxml/parser.h>
+                  #include<linux/limits.h>"
+ngx_feature_path="/usr/include/libxml2"
+ngx_feature_libs=-lxml2
+ngx_feature_test='	DIR *d;
+			struct dirent *dir;
+			int len=PATH_MAX;
+			xmlDoc *document;
+			xmlNode *root;'
+. auto/feature
+
+
+if [ "$ngx_found" != "yes" ]
+then
+    echo "libxml2 not found, please install it"
+    exit 1
+fi
